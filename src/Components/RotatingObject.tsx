@@ -1,7 +1,6 @@
 // src/RotatingObject.js
 import  { useEffect, useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
-
 const RotatingObject = ({ speed, isVisible, isRotating, position, geometryType }:any) => {
   const meshRef:any = useRef();
 
@@ -23,22 +22,22 @@ const RotatingObject = ({ speed, isVisible, isRotating, position, geometryType }
   let geometry;
   switch (geometryType) {
     case 'box':
-      geometry = <boxGeometry args={[1, 1, 1]} />;
+      geometry = <boxGeometry args={[1.5, 1.5, 1.5]} />;
       break;
-    case 'sphere':
-      geometry = <sphereGeometry args={[0.75, 32, 32]} />;
+    case 'torus':
+      geometry = <torusGeometry args={[1, 0.5, 16, 100]}/>;
       break;
-    case 'cone':
-      geometry = <coneGeometry args={[0.5, 1, 32]} />;
+    case 'dode':
+      geometry = <dodecahedronGeometry args={[0.75]} />;
       break;
     default:
       geometry = <boxGeometry args={[1, 1, 1]} />;
   }
 
   return isVisible ? (
-    <mesh ref={meshRef} position={position}>
+    <mesh ref={meshRef} position={position} >
       {geometry}
-      <meshStandardMaterial color="orange" />
+      <meshNormalMaterial  />
     </mesh>
   ) : null;
 };
